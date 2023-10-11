@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "e10311f0-b610-4608-9f1b-4f8e9862ea10",
+		"name": "SEARCH SERVICE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "5676712"
+	},
+	"item": [
+		{
+			"name": "Search By Loc-Date-Movie",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/v1/searchShowsByLocShowAndDate/KOL?movie=Make It or Break It&date=2023-10-11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"v1",
+						"searchShowsByLocShowAndDate",
+						"KOL"
+					],
+					"query": [
+						{
+							"key": "movie",
+							"value": "Make It or Break It"
+						},
+						{
+							"key": "date",
+							"value": "2023-10-11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search By Loc-Date-Movie Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8083/v1/searchShowsByLocShowAndDate/KOL?movie=Jawan&date=2023-10-11",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"v1",
+						"searchShowsByLocShowAndDate",
+						"KOL"
+					],
+					"query": [
+						{
+							"key": "movie",
+							"value": "Jawan"
+						},
+						{
+							"key": "date",
+							"value": "2023-10-11"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

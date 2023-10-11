@@ -1,0 +1,52 @@
+version: "3"
+services:
+  searchservice:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ${APP_NAME}:${TAG_NAME}
+    container_name: searchservice
+    restart: on-failure
+    depends_on:
+      - elasticsearch
+    ports:
+      - 8083:8083
+    networks:
+      - search-net
+
+  elasticsearch:
+    image: elasticsearch:8.10.2
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ${ELASTICSEARCH_DATA_HOST_PATH}:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - xpack.security.enabled=false
+      - xpack.security.enrollment.enabled=false
+      - node.name=elasticsearch
+      - cluster.name=docker-cluster
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      - search-net
+
+  kibana:
+    image: arm64v8/kibana:8.10.2
+    container_name: kibana
+    restart: always
+    depends_on:
+      -   elasticsearch
+    ports:
+      - "5601:5601"
+    environment:
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+    networks:
+      - search-net
+
+networks:
+  search-net:
+    driver: bridge
